@@ -1,0 +1,41 @@
+  <div class="quiz">
+    <h2>Creer un test</h2>
+    <form [formGroup]="complexForm" (ngSubmit)="submitForm(complexForm.value)">
+      <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['description'].valid && complexForm.controls['description'].touched}">
+        <label>Description:</label>
+        <input class="form-control" type="text" placeholder="Décrivez le test a creé" [formControl]="complexForm.controls['description']">
+        <div *ngIf="complexForm.controls['description'].hasError('required') && complexForm.controls['description'].touched" class="alert alert-danger">Vous devez ajouter la discription du test.</div>
+      </div>
+	   <div class="form-group" [ngClass]="{'has-error':!complexForm.controls['technology'].valid && complexForm.controls['technology'].touched}">
+        <label>Technologie:</label>
+	   <select class="form-control" type="text" [formControl]="complexForm.controls['technology']">
+		<option value="Java">Java</option>
+		<option value="JavaScript">JavaScript</option>
+		<option value="PhP">PhP</option>
+		<option value="Angular2">Angular2</option>
+		<option value="NodeJs">NodeJs</option>
+	  </select>
+	     <div class="form-group">
+        <label>Niveau</label>
+        <div class="alert alert-danger" *ngIf="!complexForm.controls['level'].valid && complexForm.controls['level'].touched">Il faut choisir un niveau pour chaque test.</div>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="level" value="Junior" [formControl]="complexForm.controls['level']">
+          Junior
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="level" value="Senior" [formControl]="complexForm.controls['level']">
+          Confirmé
+        </label>
+      </div>
+        <div *ngIf="complexForm.controls['technology'].hasError('required') && complexForm.controls['technology'].touched" class="alert alert-danger">Vous devez choisir une technologie pour chaque test.</div>
+      </div>
+	  
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" [disabled]="!complexForm.valid">Submit</button>
+      </div>
+    </form>
+  </div>
